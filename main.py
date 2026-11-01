@@ -8,21 +8,27 @@ Window.clearcolor = (0.05, 0.05, 0.15, 1)
 
 class QuantumApp(App):
     def build(self):
-        layout = BoxLayout(orientation='vertical', padding=20, spacing=20)
-        
-        title = Label(text='QUANTUM ARMOUR V20', font_size='24sp', bold=True)
-        
-        self.status = Label(text='Status: ARMOUR INACTIVE', font_size='18sp')
-        
-        btn = Button(text='ACTIVATE QUANTUM SHIELD', size_hint=(1, 0.3), background_color=(0, 0.8, 0.9, 1))
+        layout = BoxLayout(
+            orientation='vertical',
+            padding=20,
+            spacing=20)
+        title = Label(
+            text='QUANTUM ARMOUR V20',
+            font_size=24,
+            bold=True)
+        self.status = Label(
+            text='Status: INACTIVE',
+            font_size=18)
+        btn = Button(
+            text='ACTIVATE SHIELD',
+            size_hint=(1, 0.3))
         btn.bind(on_press=self.activate)
-
         layout.add_widget(title)
         layout.add_widget(self.status)
         layout.add_widget(btn)
         return layout
-    
+
     def activate(self, instance):
-        self.status.text = 'Status: ARMOUR ACTIVE - SHIELD ON!'
+        self.status.text = 'Status: ACTIVE'
 
 QuantumApp().run()
