@@ -2,38 +2,14 @@ name: Build APK
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: digreatbrian/buildozer-action@v1
         with:
-          python-version: '3.10'
-      - name: Install deps
-        run: |
-          sudo apt update
-          sudo apt install -y git
-          sudo apt install -y zip
-          sudo apt install -y unzip
-          sudo apt install -y openjdk-17-jdk
-          sudo apt install -y autoconf
-          sudo apt install -y libtool
-          sudo apt install -y pkg-config
-          sudo apt install -y zlib1g-dev
-          sudo apt install -y libncurses5-dev
-          sudo apt install -y libncursesw5-dev
-          sudo apt install -y libtinfo5
-          sudo apt install -y cmake
-          sudo apt install -y libffi-dev
-          sudo apt install -y libssl-dev
-          sudo apt install -y libltdl-dev
-          pip install --upgrade pip
-          pip install buildozer
-          pip install cython==0.29.33
-      - name: Build
-        run: |
-          yes | buildozer -v android debug
-      - name: Upload
-        uses: actions/upload-artifact@v4
+          command: buildozer android debug
+          buildozer_version: stable
+      - uses: actions/upload-artifact@v4
         with:
-          name: QuantumArmour-APK
+          name: APK
           path: bin/*.apk
