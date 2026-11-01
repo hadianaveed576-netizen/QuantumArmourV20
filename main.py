@@ -10,16 +10,19 @@ class QuantumApp(App):
     def build(self):
         layout = BoxLayout(orientation='vertical', padding=20, spacing=20)
         
-        title = Label(text='QUANTUM ARMOUR V20\nULTIMATE PROTECTION', font_size='22sp', bold=True, color=(0,1,0.8,1), size_hint_y=0.3)
+        title = Label(text='QUANTUM ARMOUR V20', font_size='24sp', bold=True)
         
-        status = Label(text='Status: ARMOUR ACTIVE\nThreats Blocked: 0\nSystem: Secure', font_size='18sp', color=(1,1,1,1))
+        self.status = Label(text='Status: ARMOUR INACTIVE', font_size='18sp')
         
-        btn = Button(text='ACTIVATE QUANTUM SHIELD', font_size='20sp', background_color=(0,0.8,0.6,1), size_hint_y=0.25)
-        btn.bind(on_press=lambda x: setattr(status, 'text', 'Status: SHIELD MAX POWER!\nThreats Blocked: 999+\nSystem: INVINCIBLE V20'))
-        
+        btn = Button(text='ACTIVATE QUANTUM SHIELD', size_hint=(1, 0.3), background_color=(0, 0.8, 0.9, 1))
+        btn.bind(on_press=self.activate)
+
         layout.add_widget(title)
-        layout.add_widget(status)
+        layout.add_widget(self.status)
         layout.add_widget(btn)
         return layout
+    
+    def activate(self, instance):
+        self.status.text = 'Status: ARMOUR ACTIVE - SHIELD ON!'
 
 QuantumApp().run()
